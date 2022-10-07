@@ -70,7 +70,7 @@ T_BUILDING_CATEGORY = sp.TRecord(
     ))
 )
 
-CONST_BUILDINGS = sp.big_map(
+DATA_BUILDINGS = sp.big_map(
     {
         0: sp.record(
             building_kind=sp.nat(0),  # Farm
@@ -472,6 +472,34 @@ class ResourceStorage(sp.Contract):
             stone_per_epoch=30,
             iron_per_epoch=30)
 
+    def upgrade_building(self, token_id, building_id, to_level):
+        building_cost = sp.local(
+            'building_cost', self.data.building_categories[building_id].resource_updates[to_level])
+        self.is_resource_enough_for_building(
+            building_cost,  token_id, building_id, to_level)
+
+        self.data.resource_map[token_id].food = sp.as_nat(self.data.resource_map[token_id].food -
+                                                          building_cost.value.food_cost)
+        self.data.resource_map[token_id].wood = sp.as_nat(self.data.resource_map[token_id].wood -
+                                                          building_cost.value.wood_cost)
+        self.data.resource_map[token_id].stone = sp.as_nat(self.data.resource_map[token_id].stone -
+                                                           building_cost.value.stone_cost)
+        self.data.resource_map[token_id].iron = sp.as_nat(self.data.resource_map[token_id].iron -
+                                                          building_cost.value.iron_cost)
+        self.data.resource_map[token_id].aurum = sp.as_nat(self.data.resource_map[token_id].aurum -
+                                                           building_cost.value.aurum_cost)
+
+        self.data.resource_map[token_id].food_per_epoch += building_cost.value.food_per_epoch
+        self.data.resource_map[token_id].wood_per_epoch += building_cost.value.wood_per_epoch
+        self.data.resource_map[token_id].stone_per_epoch += building_cost.value.stone_per_epoch
+        self.data.resource_map[token_id].iron_per_epoch += building_cost.value.iron_per_epoch
+        self.data.resource_map[token_id].faith += building_cost.value.faith_plus
+        self.data.resource_map[token_id].beauty += building_cost.value.beauty_plus
+
+        self.data.resource_map[token_id].population_limit += building_cost.value.population_plus
+        self.data.resource_map[token_id].population_limit = sp.as_nat(
+            self.data.resource_map[token_id].population_limit - building_cost.value.population_minus)
+
     def update_resource(self, token_id):
         self.is_active_city(token_id)
         duration_sec = sp.local('duration_sec', sp.now -
@@ -489,6 +517,19 @@ class ResourceStorage(sp.Contract):
         self.data.temp1 = duration_sec.value
         self.data.temp2 = duration_day.value
         self.data.temp3 = self.data.resource_map[token_id].last_claim_time
+
+    def is_resource_enough_for_building(self, building_cost,  token_id, building_id, to_level):
+
+        sp.verify(self.data.resource_map[token_id].food >=
+                  building_cost.value.food_cost, "ResourceStorage: Not enough food")
+        sp.verify(self.data.resource_map[token_id].wood >=
+                  building_cost.value.wood_cost, "ResourceStorage: Not enough wood")
+        sp.verify(self.data.resource_map[token_id].stone >=
+                  building_cost.value.stone_cost, "ResourceStorage: Not enough stone")
+        sp.verify(self.data.resource_map[token_id].iron >=
+                  building_cost.value.iron_cost, "ResourceStorage: Not enough iron")
+        sp.verify(
+            self.data.resource_map[token_id].population_limit >= building_cost.value.population_minus, "ResourceStorage: Popluation is limited")
 
     # def harvest_resource(self, token_id):
 
@@ -510,7 +551,18 @@ class GameGov(FA2.Admin, FA2.WithdrawMutez, NftOwnerCheck, ResourceStorage, Buil
     @sp.entry_point
     def harvest_resource(self, token_id):
         self.is_valid_owner(sp.sender, token_id)
+        self.is_active_city(token_id)
+
         self.update_resource(token_id)
+
+    @sp.entry_point
+    def setup_building(self, token_id, building_id):
+        self.is_valid_owner(sp.sender, token_id)
+        self.is_active_city(token_id)
+        self.update_resource(token_id)
+        # self.is_resource_enough_for_building(token_id, building_id, 0)
+        self.upgrade_building(token_id, building_id, 0)
+        pass
 
 
 @ sp.add_test(name="Game Gov with Resource manager")
@@ -552,5 +604,5 @@ def test():
 sp.add_compilation_target("GameGov_Compiled", GameGov(
     admin=sp.address("tz1i66XefcqsNVSGa2iFsWb8qxokm3neVpFR"),
     nft_contract=sp.address("KT1KFczzgYkxLqTGmhbBvmew12WN3qbkBq4E"),
-    building_categories=CONST_BUILDINGS
+    building_categories=DATA_BUILDINGS
 ))
