@@ -33,6 +33,7 @@ T_CITY_RESOURCE = sp.TRecord(
     wood_per_epoch=sp.TNat,
     stone_per_epoch=sp.TNat,
     iron_per_epoch=sp.TNat,
+    building_list=sp.TList(sp.TNat)
 )
 # .layout('city_level', 'faith', 'beauty',
 #          'food', 'wood', 'stone', 'iron', 'aurum',
@@ -48,7 +49,7 @@ T_BUILDING_CATEGORY = sp.TRecord(
 
     building_kind=sp.TNat,
     # Unique if for each building type
-    # building_id=sp.TNat,
+    # building_kind=sp.TNat,
     # Costs per level
     resource_updates=sp.TMap(sp.TNat, sp.TRecord(
 
@@ -79,43 +80,6 @@ DATA_BUILDINGS = sp.big_map(
             resource_updates=sp.map(
                 {
                     0: sp.record(
-
-                        food_cost=sp.nat(15),
-                        wood_cost=sp.nat(30),
-                        stone_cost=sp.nat(0),
-                        iron_cost=sp.nat(5),
-                        aurum_cost=sp.nat(0),
-
-                        food_per_epoch=sp.nat(10),
-                        wood_per_epoch=sp.nat(0),
-                        stone_per_epoch=sp.nat(0),
-                        iron_per_epoch=sp.nat(0),
-
-                        population_plus=sp.nat(0),
-                        population_minus=sp.nat(10),
-                        faith_plus=sp.nat(0),
-                        beauty_plus=sp.nat(0),
-                    ),
-                    1: sp.record(
-
-                        food_cost=sp.nat(15),
-                        wood_cost=sp.nat(30),
-                        stone_cost=sp.nat(0),
-                        iron_cost=sp.nat(5),
-                        aurum_cost=sp.nat(0),
-
-                        food_per_epoch=sp.nat(12),
-                        wood_per_epoch=sp.nat(0),
-                        stone_per_epoch=sp.nat(0),
-                        iron_per_epoch=sp.nat(0),
-
-                        population_plus=sp.nat(0),
-                        population_minus=sp.nat(0),
-                        faith_plus=sp.nat(0),
-                        beauty_plus=sp.nat(0),
-                    ),
-                    2: sp.record(
-
                         food_cost=sp.nat(15),
                         wood_cost=sp.nat(30),
                         stone_cost=sp.nat(0),
@@ -128,7 +92,41 @@ DATA_BUILDINGS = sp.big_map(
                         iron_per_epoch=sp.nat(0),
 
                         population_plus=sp.nat(0),
+                        population_minus=sp.nat(10),
+                        faith_plus=sp.nat(0),
+                        beauty_plus=sp.nat(0),
+                    ),
+                    1: sp.record(
+                        food_cost=sp.nat(15),
+                        wood_cost=sp.nat(100),
+                        stone_cost=sp.nat(10),
+                        iron_cost=sp.nat(5),
+                        aurum_cost=sp.nat(0),
+
+                        food_per_epoch=sp.nat(17),
+                        wood_per_epoch=sp.nat(0),
+                        stone_per_epoch=sp.nat(0),
+                        iron_per_epoch=sp.nat(0),
+
+                        population_plus=sp.nat(0),
                         population_minus=sp.nat(0),
+                        faith_plus=sp.nat(0),
+                        beauty_plus=sp.nat(0),
+                    ),
+                    2: sp.record(
+                        food_cost=sp.nat(15),
+                        wood_cost=sp.nat(300),
+                        stone_cost=sp.nat(0),
+                        iron_cost=sp.nat(30),
+                        aurum_cost=sp.nat(0),
+
+                        food_per_epoch=sp.nat(20),
+                        wood_per_epoch=sp.nat(0),
+                        stone_per_epoch=sp.nat(0),
+                        iron_per_epoch=sp.nat(0),
+
+                        population_plus=sp.nat(0),
+                        population_minus=sp.nat(2),
                         faith_plus=sp.nat(0),
                         beauty_plus=sp.nat(0),
                     )
@@ -141,15 +139,14 @@ DATA_BUILDINGS = sp.big_map(
             resource_updates=sp.map(
                 {
                     0: sp.record(
-
                         food_cost=sp.nat(0),
                         wood_cost=sp.nat(30),
                         stone_cost=sp.nat(15),
-                        iron_cost=sp.nat(5),
+                        iron_cost=sp.nat(15),
                         aurum_cost=sp.nat(0),
 
                         food_per_epoch=sp.nat(0),
-                        wood_per_epoch=sp.nat(7),
+                        wood_per_epoch=sp.nat(10),
                         stone_per_epoch=sp.nat(0),
                         iron_per_epoch=sp.nat(0),
 
@@ -159,15 +156,14 @@ DATA_BUILDINGS = sp.big_map(
                         beauty_plus=sp.nat(0),
                     ),
                     1: sp.record(
-
                         food_cost=sp.nat(0),
-                        wood_cost=sp.nat(30),
-                        stone_cost=sp.nat(15),
-                        iron_cost=sp.nat(5),
+                        wood_cost=sp.nat(55),
+                        stone_cost=sp.nat(105),
+                        iron_cost=sp.nat(15),
                         aurum_cost=sp.nat(0),
 
                         food_per_epoch=sp.nat(0),
-                        wood_per_epoch=sp.nat(9),
+                        wood_per_epoch=sp.nat(12),
                         stone_per_epoch=sp.nat(0),
                         iron_per_epoch=sp.nat(0),
 
@@ -177,19 +173,18 @@ DATA_BUILDINGS = sp.big_map(
                         beauty_plus=sp.nat(0),
                     ),
                     2: sp.record(
-
                         food_cost=sp.nat(0),
-                        wood_cost=sp.nat(30),
-                        stone_cost=sp.nat(15),
-                        iron_cost=sp.nat(5),
+                        wood_cost=sp.nat(100),
+                        stone_cost=sp.nat(250),
+                        iron_cost=sp.nat(45),
                         aurum_cost=sp.nat(0),
 
                         food_per_epoch=sp.nat(0),
-                        wood_per_epoch=sp.nat(12),
+                        wood_per_epoch=sp.nat(15),
                         stone_per_epoch=sp.nat(0),
                         iron_per_epoch=sp.nat(0),
 
-                        population_plus=sp.nat(0),
+                        population_plus=sp.nat(1),
                         population_minus=sp.nat(0),
                         faith_plus=sp.nat(0),
                         beauty_plus=sp.nat(0),
@@ -203,7 +198,6 @@ DATA_BUILDINGS = sp.big_map(
             resource_updates=sp.map(
                 {
                     0: sp.record(
-
                         food_cost=sp.nat(0),
                         wood_cost=sp.nat(30),
                         stone_cost=sp.nat(5),
@@ -212,7 +206,7 @@ DATA_BUILDINGS = sp.big_map(
 
                         food_per_epoch=sp.nat(0),
                         wood_per_epoch=sp.nat(0),
-                        stone_per_epoch=sp.nat(7),
+                        stone_per_epoch=sp.nat(10),
                         iron_per_epoch=sp.nat(0),
 
                         population_plus=sp.nat(0),
@@ -224,26 +218,8 @@ DATA_BUILDINGS = sp.big_map(
 
                         food_cost=sp.nat(0),
                         wood_cost=sp.nat(30),
-                        stone_cost=sp.nat(5),
-                        iron_cost=sp.nat(15),
-                        aurum_cost=sp.nat(0),
-
-                        food_per_epoch=sp.nat(0),
-                        wood_per_epoch=sp.nat(0),
-                        stone_per_epoch=sp.nat(9),
-                        iron_per_epoch=sp.nat(0),
-
-                        population_plus=sp.nat(0),
-                        population_minus=sp.nat(0),
-                        faith_plus=sp.nat(0),
-                        beauty_plus=sp.nat(0),
-                    ),
-                    2: sp.record(
-
-                        food_cost=sp.nat(0),
-                        wood_cost=sp.nat(30),
-                        stone_cost=sp.nat(5),
-                        iron_cost=sp.nat(15),
+                        stone_cost=sp.nat(10),
+                        iron_cost=sp.nat(45),
                         aurum_cost=sp.nat(0),
 
                         food_per_epoch=sp.nat(0),
@@ -253,6 +229,23 @@ DATA_BUILDINGS = sp.big_map(
 
                         population_plus=sp.nat(0),
                         population_minus=sp.nat(0),
+                        faith_plus=sp.nat(0),
+                        beauty_plus=sp.nat(0),
+                    ),
+                    2: sp.record(
+                        food_cost=sp.nat(0),
+                        wood_cost=sp.nat(100),
+                        stone_cost=sp.nat(150),
+                        iron_cost=sp.nat(35),
+                        aurum_cost=sp.nat(0),
+
+                        food_per_epoch=sp.nat(0),
+                        wood_per_epoch=sp.nat(0),
+                        stone_per_epoch=sp.nat(15),
+                        iron_per_epoch=sp.nat(0),
+
+                        population_plus=sp.nat(0),
+                        population_minus=sp.nat(1),
                         faith_plus=sp.nat(0),
                         beauty_plus=sp.nat(0),
                     )
@@ -265,17 +258,16 @@ DATA_BUILDINGS = sp.big_map(
             resource_updates=sp.map(
                 {
                     0: sp.record(
-
                         food_cost=sp.nat(0),
-                        wood_cost=sp.nat(15),
-                        stone_cost=sp.nat(30),
-                        iron_cost=sp.nat(15),
+                        wood_cost=sp.nat(30),
+                        stone_cost=sp.nat(15),
+                        iron_cost=sp.nat(5),
                         aurum_cost=sp.nat(0),
 
                         food_per_epoch=sp.nat(0),
                         wood_per_epoch=sp.nat(0),
                         stone_per_epoch=sp.nat(0),
-                        iron_per_epoch=sp.nat(7),
+                        iron_per_epoch=sp.nat(10),
 
                         population_plus=sp.nat(0),
                         population_minus=sp.nat(5),
@@ -283,29 +275,10 @@ DATA_BUILDINGS = sp.big_map(
                         beauty_plus=sp.nat(0),
                     ),
                     1: sp.record(
-
                         food_cost=sp.nat(0),
-                        wood_cost=sp.nat(15),
-                        stone_cost=sp.nat(30),
-                        iron_cost=sp.nat(15),
-                        aurum_cost=sp.nat(0),
-
-                        food_per_epoch=sp.nat(0),
-                        wood_per_epoch=sp.nat(0),
-                        stone_per_epoch=sp.nat(0),
-                        iron_per_epoch=sp.nat(9),
-
-                        population_plus=sp.nat(0),
-                        population_minus=sp.nat(0),
-                        faith_plus=sp.nat(0),
-                        beauty_plus=sp.nat(0),
-                    ),
-                    2: sp.record(
-
-                        food_cost=sp.nat(0),
-                        wood_cost=sp.nat(15),
-                        stone_cost=sp.nat(30),
-                        iron_cost=sp.nat(15),
+                        wood_cost=sp.nat(75),
+                        stone_cost=sp.nat(15),
+                        iron_cost=sp.nat(30),
                         aurum_cost=sp.nat(0),
 
                         food_per_epoch=sp.nat(0),
@@ -315,6 +288,23 @@ DATA_BUILDINGS = sp.big_map(
 
                         population_plus=sp.nat(0),
                         population_minus=sp.nat(0),
+                        faith_plus=sp.nat(0),
+                        beauty_plus=sp.nat(0),
+                    ),
+                    2: sp.record(
+                        food_cost=sp.nat(0),
+                        wood_cost=sp.nat(150),
+                        stone_cost=sp.nat(15),
+                        iron_cost=sp.nat(5),
+                        aurum_cost=sp.nat(0),
+
+                        food_per_epoch=sp.nat(0),
+                        wood_per_epoch=sp.nat(0),
+                        stone_per_epoch=sp.nat(0),
+                        iron_per_epoch=sp.nat(15),
+
+                        population_plus=sp.nat(0),
+                        population_minus=sp.nat(1),
                         faith_plus=sp.nat(0),
                         beauty_plus=sp.nat(0),
                     )
@@ -327,11 +317,10 @@ DATA_BUILDINGS = sp.big_map(
             resource_updates=sp.map(
                 {
                     0: sp.record(
-
-                        food_cost=sp.nat(0),
-                        wood_cost=sp.nat(50),
-                        stone_cost=sp.nat(0),
-                        iron_cost=sp.nat(0),
+                        food_cost=sp.nat(15),
+                        wood_cost=sp.nat(25),
+                        stone_cost=sp.nat(15),
+                        iron_cost=sp.nat(5),
                         aurum_cost=sp.nat(0),
 
                         food_per_epoch=sp.nat(0),
@@ -345,11 +334,10 @@ DATA_BUILDINGS = sp.big_map(
                         beauty_plus=sp.nat(0),
                     ),
                     1: sp.record(
-
                         food_cost=sp.nat(0),
-                        wood_cost=sp.nat(150),
-                        stone_cost=sp.nat(0),
-                        iron_cost=sp.nat(0),
+                        wood_cost=sp.nat(50),
+                        stone_cost=sp.nat(20),
+                        iron_cost=sp.nat(5),
                         aurum_cost=sp.nat(0),
 
                         food_per_epoch=sp.nat(0),
@@ -357,15 +345,123 @@ DATA_BUILDINGS = sp.big_map(
                         stone_per_epoch=sp.nat(0),
                         iron_per_epoch=sp.nat(0),
 
-                        population_plus=sp.nat(12),
+                        population_plus=sp.nat(2),
                         population_minus=sp.nat(0),
                         faith_plus=sp.nat(0),
                         beauty_plus=sp.nat(0),
                     ),
                     2: sp.record(
-
                         food_cost=sp.nat(0),
-                        wood_cost=sp.nat(450),
+                        wood_cost=sp.nat(100),
+                        stone_cost=sp.nat(45),
+                        iron_cost=sp.nat(10),
+                        aurum_cost=sp.nat(0),
+
+                        food_per_epoch=sp.nat(0),
+                        wood_per_epoch=sp.nat(0),
+                        stone_per_epoch=sp.nat(0),
+                        iron_per_epoch=sp.nat(0),
+
+                        population_plus=sp.nat(3),
+                        population_minus=sp.nat(0),
+                        faith_plus=sp.nat(0),
+                        beauty_plus=sp.nat(0),
+                    )
+                })
+        ),
+        5: sp.record(
+            building_kind=sp.nat(5),  # Marketplace
+            # Unique if for each building type
+            # Costs per level
+            resource_updates=sp.map(
+                {
+                    0: sp.record(
+                        food_cost=sp.nat(0),
+                        wood_cost=sp.nat(45),
+                        stone_cost=sp.nat(25),
+                        iron_cost=sp.nat(0),
+                        aurum_cost=sp.nat(0),
+
+                        food_per_epoch=sp.nat(0),
+                        wood_per_epoch=sp.nat(0),
+                        stone_per_epoch=sp.nat(0),
+                        iron_per_epoch=sp.nat(0),
+
+                        population_plus=sp.nat(0),
+                        population_minus=sp.nat(0),
+                        faith_plus=sp.nat(0),
+                        beauty_plus=sp.nat(0),
+                    ),
+                    1: sp.record(
+                        food_cost=sp.nat(200),
+                        wood_cost=sp.nat(75),
+                        stone_cost=sp.nat(50),
+                        iron_cost=sp.nat(0),
+                        aurum_cost=sp.nat(0),
+
+                        food_per_epoch=sp.nat(0),
+                        wood_per_epoch=sp.nat(0),
+                        stone_per_epoch=sp.nat(0),
+                        iron_per_epoch=sp.nat(0),
+
+                        population_plus=sp.nat(0),
+                        population_minus=sp.nat(0),
+                        faith_plus=sp.nat(0),
+                        beauty_plus=sp.nat(0),
+                    ),
+                    2: sp.record(
+                        food_cost=sp.nat(0),
+                        wood_cost=sp.nat(300),
+                        stone_cost=sp.nat(80),
+                        iron_cost=sp.nat(0),
+                        aurum_cost=sp.nat(0),
+
+                        food_per_epoch=sp.nat(0),
+                        wood_per_epoch=sp.nat(0),
+                        stone_per_epoch=sp.nat(0),
+                        iron_per_epoch=sp.nat(0),
+
+                        population_plus=sp.nat(0),
+                        population_minus=sp.nat(0),
+                        faith_plus=sp.nat(0),
+                        beauty_plus=sp.nat(0),
+                    )
+                })
+        ),
+        6: sp.record(
+            building_kind=sp.nat(6),  # Traning Center
+            # Unique if for each building type
+            # Costs per level
+            resource_updates=sp.map(
+                {
+                    0: sp.record(
+                        food_cost=sp.nat(0),
+                        wood_cost=sp.nat(100),
+                        stone_cost=sp.nat(50),
+                        iron_cost=sp.nat(0),
+                        aurum_cost=sp.nat(0),
+
+                        food_per_epoch=sp.nat(0),
+                        wood_per_epoch=sp.nat(0),
+                        stone_per_epoch=sp.nat(0),
+                        iron_per_epoch=sp.nat(0),
+
+                        population_plus=sp.nat(0),
+                        population_minus=sp.nat(0),
+                        faith_plus=sp.nat(0),
+                        beauty_plus=sp.nat(0),
+                    ),
+                })
+        ),
+        7: sp.record(
+            building_kind=sp.nat(7),  # Trees
+            # Unique if for each building type
+            # Costs per level
+            resource_updates=sp.map(
+                {
+                    0: sp.record(
+                        food_cost=sp.nat(0),
+                        wood_cost=sp.nat(25),
                         stone_cost=sp.nat(0),
                         iron_cost=sp.nat(0),
                         aurum_cost=sp.nat(0),
@@ -375,11 +471,311 @@ DATA_BUILDINGS = sp.big_map(
                         stone_per_epoch=sp.nat(0),
                         iron_per_epoch=sp.nat(0),
 
-                        population_plus=sp.nat(15),
+                        population_plus=sp.nat(0),
+                        population_minus=sp.nat(0),
+                        faith_plus=sp.nat(0),
+                        beauty_plus=sp.nat(5),
+                    ),
+                })
+        ),
+        8: sp.record(
+            building_kind=sp.nat(8),  # Chapel
+            # Unique if for each building type
+            # Costs per level
+            resource_updates=sp.map(
+                {
+                    0: sp.record(
+                        food_cost=sp.nat(0),
+                        wood_cost=sp.nat(50),
+                        stone_cost=sp.nat(150),
+                        iron_cost=sp.nat(0),
+                        aurum_cost=sp.nat(0),
+
+                        food_per_epoch=sp.nat(0),
+                        wood_per_epoch=sp.nat(0),
+                        stone_per_epoch=sp.nat(0),
+                        iron_per_epoch=sp.nat(0),
+
+                        population_plus=sp.nat(0),
+                        population_minus=sp.nat(0),
+                        faith_plus=sp.nat(25),
+                        beauty_plus=sp.nat(0),
+                    ),
+                })
+        ),
+        9: sp.record(
+            building_kind=sp.nat(9),  # Keep
+            # Unique if for each building type
+            # Costs per level
+            resource_updates=sp.map(
+                {
+                    0: sp.record(
+                        food_cost=sp.nat(0),
+                        wood_cost=sp.nat(0),
+                        stone_cost=sp.nat(0),
+                        iron_cost=sp.nat(0),
+                        aurum_cost=sp.nat(0),
+
+                        food_per_epoch=sp.nat(0),
+                        wood_per_epoch=sp.nat(0),
+                        stone_per_epoch=sp.nat(0),
+                        iron_per_epoch=sp.nat(0),
+
+                        population_plus=sp.nat(0),
                         population_minus=sp.nat(0),
                         faith_plus=sp.nat(0),
                         beauty_plus=sp.nat(0),
-                    )
+                    ),
+                })
+        ),
+        10: sp.record(
+            building_kind=sp.nat(10),  # Archery center
+            # Unique if for each building type
+            # Costs per level
+            resource_updates=sp.map(
+                {
+                    0: sp.record(
+                        food_cost=sp.nat(0),
+                        wood_cost=sp.nat(100),
+                        stone_cost=sp.nat(100),
+                        iron_cost=sp.nat(25),
+                        aurum_cost=sp.nat(0),
+
+                        food_per_epoch=sp.nat(0),
+                        wood_per_epoch=sp.nat(0),
+                        stone_per_epoch=sp.nat(0),
+                        iron_per_epoch=sp.nat(0),
+
+                        population_plus=sp.nat(0),
+                        population_minus=sp.nat(0),
+                        faith_plus=sp.nat(0),
+                        beauty_plus=sp.nat(0),
+                    ),
+                })
+        ),
+        11: sp.record(
+            building_kind=sp.nat(11),  # Barracks
+            # Unique if for each building type
+            # Costs per level
+            resource_updates=sp.map(
+                {
+                    0: sp.record(
+                        food_cost=sp.nat(0),
+                        wood_cost=sp.nat(50),
+                        stone_cost=sp.nat(200),
+                        iron_cost=sp.nat(45),
+                        aurum_cost=sp.nat(0),
+
+                        food_per_epoch=sp.nat(0),
+                        wood_per_epoch=sp.nat(0),
+                        stone_per_epoch=sp.nat(0),
+                        iron_per_epoch=sp.nat(0),
+
+                        population_plus=sp.nat(0),
+                        population_minus=sp.nat(0),
+                        faith_plus=sp.nat(0),
+                        beauty_plus=sp.nat(0),
+                    ),
+                })
+        ),
+        12: sp.record(
+            building_kind=sp.nat(12),  # Church
+            # Unique if for each building type
+            # Costs per level
+            resource_updates=sp.map(
+                {
+                    0: sp.record(
+                        food_cost=sp.nat(100),
+                        wood_cost=sp.nat(100),
+                        stone_cost=sp.nat(500),
+                        iron_cost=sp.nat(100),
+                        aurum_cost=sp.nat(0),
+
+                        food_per_epoch=sp.nat(0),
+                        wood_per_epoch=sp.nat(0),
+                        stone_per_epoch=sp.nat(0),
+                        iron_per_epoch=sp.nat(0),
+
+                        population_plus=sp.nat(0),
+                        population_minus=sp.nat(0),
+                        faith_plus=sp.nat(100),
+                        beauty_plus=sp.nat(0),
+                    ),
+                })
+        ),
+        13: sp.record(
+            building_kind=sp.nat(13),  # Statue
+            # Unique if for each building type
+            # Costs per level
+            resource_updates=sp.map(
+                {
+                    0: sp.record(
+                        food_cost=sp.nat(0),
+                        wood_cost=sp.nat(0),
+                        stone_cost=sp.nat(80),
+                        iron_cost=sp.nat(10),
+                        aurum_cost=sp.nat(0),
+
+                        food_per_epoch=sp.nat(0),
+                        wood_per_epoch=sp.nat(0),
+                        stone_per_epoch=sp.nat(0),
+                        iron_per_epoch=sp.nat(0),
+
+                        population_plus=sp.nat(0),
+                        population_minus=sp.nat(0),
+                        faith_plus=sp.nat(0),
+                        beauty_plus=sp.nat(50),
+                    ),
+                })
+        ),
+        14: sp.record(
+            building_kind=sp.nat(14),  # Stables
+            # Unique if for each building type
+            # Costs per level
+            resource_updates=sp.map(
+                {
+                    0: sp.record(
+                        food_cost=sp.nat(0),
+                        wood_cost=sp.nat(125),
+                        stone_cost=sp.nat(50),
+                        iron_cost=sp.nat(25),
+                        aurum_cost=sp.nat(0),
+
+                        food_per_epoch=sp.nat(0),
+                        wood_per_epoch=sp.nat(0),
+                        stone_per_epoch=sp.nat(0),
+                        iron_per_epoch=sp.nat(0),
+
+                        population_plus=sp.nat(0),
+                        population_minus=sp.nat(0),
+                        faith_plus=sp.nat(0),
+                        beauty_plus=sp.nat(0),
+                    ),
+                })
+        ),
+        15: sp.record(
+            building_kind=sp.nat(15),  # Blacksmith
+            # Unique if for each building type
+            # Costs per level
+            resource_updates=sp.map(
+                {
+                    0: sp.record(
+                        food_cost=sp.nat(0),
+                        wood_cost=sp.nat(25),
+                        stone_cost=sp.nat(100),
+                        iron_cost=sp.nat(125),
+                        aurum_cost=sp.nat(0),
+
+                        food_per_epoch=sp.nat(0),
+                        wood_per_epoch=sp.nat(0),
+                        stone_per_epoch=sp.nat(0),
+                        iron_per_epoch=sp.nat(0),
+
+                        population_plus=sp.nat(0),
+                        population_minus=sp.nat(0),
+                        faith_plus=sp.nat(0),
+                        beauty_plus=sp.nat(0),
+                    ),
+                })
+        ),
+        16: sp.record(
+            building_kind=sp.nat(16),  # Fletcher
+            # Unique if for each building type
+            # Costs per level
+            resource_updates=sp.map(
+                {
+                    0: sp.record(
+                        food_cost=sp.nat(0),
+                        wood_cost=sp.nat(25),
+                        stone_cost=sp.nat(100),
+                        iron_cost=sp.nat(125),
+                        aurum_cost=sp.nat(0),
+
+                        food_per_epoch=sp.nat(0),
+                        wood_per_epoch=sp.nat(0),
+                        stone_per_epoch=sp.nat(0),
+                        iron_per_epoch=sp.nat(0),
+
+                        population_plus=sp.nat(0),
+                        population_minus=sp.nat(0),
+                        faith_plus=sp.nat(0),
+                        beauty_plus=sp.nat(0),
+                    ),
+                })
+        ),
+        17: sp.record(
+            building_kind=sp.nat(17),  # Siege Workshop
+            # Unique if for each building type
+            # Costs per level
+            resource_updates=sp.map(
+                {
+                    0: sp.record(
+                        food_cost=sp.nat(0),
+                        wood_cost=sp.nat(400),
+                        stone_cost=sp.nat(25),
+                        iron_cost=sp.nat(100),
+                        aurum_cost=sp.nat(0),
+
+                        food_per_epoch=sp.nat(0),
+                        wood_per_epoch=sp.nat(0),
+                        stone_per_epoch=sp.nat(0),
+                        iron_per_epoch=sp.nat(0),
+
+                        population_plus=sp.nat(0),
+                        population_minus=sp.nat(0),
+                        faith_plus=sp.nat(0),
+                        beauty_plus=sp.nat(0),
+                    ),
+                })
+        ),
+        18: sp.record(
+            building_kind=sp.nat(18),  # Rune Carver
+            # Unique if for each building type
+            # Costs per level
+            resource_updates=sp.map(
+                {
+                    0: sp.record(
+                        food_cost=sp.nat(0),
+                        wood_cost=sp.nat(50),
+                        stone_cost=sp.nat(300),
+                        iron_cost=sp.nat(100),
+                        aurum_cost=sp.nat(0),
+
+                        food_per_epoch=sp.nat(0),
+                        wood_per_epoch=sp.nat(0),
+                        stone_per_epoch=sp.nat(0),
+                        iron_per_epoch=sp.nat(0),
+
+                        population_plus=sp.nat(0),
+                        population_minus=sp.nat(0),
+                        faith_plus=sp.nat(0),
+                        beauty_plus=sp.nat(0),
+                    ),
+                })
+        ),
+        19: sp.record(
+            building_kind=sp.nat(19),  # Guild Barracks
+            # Unique if for each building type
+            # Costs per level
+            resource_updates=sp.map(
+                {
+                    0: sp.record(
+                        food_cost=sp.nat(0),
+                        wood_cost=sp.nat(250),
+                        stone_cost=sp.nat(180),
+                        iron_cost=sp.nat(50),
+                        aurum_cost=sp.nat(0),
+
+                        food_per_epoch=sp.nat(0),
+                        wood_per_epoch=sp.nat(0),
+                        stone_per_epoch=sp.nat(0),
+                        iron_per_epoch=sp.nat(0),
+
+                        population_plus=sp.nat(0),
+                        population_minus=sp.nat(0),
+                        faith_plus=sp.nat(0),
+                        beauty_plus=sp.nat(0),
+                    ),
                 })
         )
     })
@@ -470,13 +866,16 @@ class ResourceStorage(sp.Contract):
             food_per_epoch=45,
             wood_per_epoch=30,
             stone_per_epoch=30,
-            iron_per_epoch=30)
+            iron_per_epoch=30,
 
-    def upgrade_building(self, token_id, building_id, to_level):
+            building_list=[]
+        )
+
+    def upgrade_building(self, token_id, building_kind, to_level):
         building_cost = sp.local(
-            'building_cost', self.data.building_categories[building_id].resource_updates[to_level])
+            'building_cost', self.data.building_categories[building_kind].resource_updates[to_level])
         self.is_resource_enough_for_building(
-            building_cost,  token_id, building_id, to_level)
+            building_cost,  token_id, building_kind, to_level)
 
         self.data.resource_map[token_id].food = sp.as_nat(self.data.resource_map[token_id].food -
                                                           building_cost.value.food_cost)
@@ -518,7 +917,7 @@ class ResourceStorage(sp.Contract):
         self.data.temp2 = duration_day.value
         self.data.temp3 = self.data.resource_map[token_id].last_claim_time
 
-    def is_resource_enough_for_building(self, building_cost,  token_id, building_id, to_level):
+    def is_resource_enough_for_building(self, building_cost,  token_id, building_kind, to_level):
 
         sp.verify(self.data.resource_map[token_id].food >=
                   building_cost.value.food_cost, "ResourceStorage: Not enough food")
@@ -556,12 +955,11 @@ class GameGov(FA2.Admin, FA2.WithdrawMutez, NftOwnerCheck, ResourceStorage, Buil
         self.update_resource(token_id)
 
     @sp.entry_point
-    def setup_building(self, token_id, building_id):
+    def setup_building(self, token_id, building_kind):
         self.is_valid_owner(sp.sender, token_id)
         self.is_active_city(token_id)
         self.update_resource(token_id)
-        # self.is_resource_enough_for_building(token_id, building_id, 0)
-        self.upgrade_building(token_id, building_id, 0)
+        self.upgrade_building(token_id, building_kind, 0)
         pass
 
 
